@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# monrestart
+# monrestart v0.1
 # http://kloudberry.co.uk/
 #
 # Copyright (c) 2013 Markus Liljergren
@@ -10,6 +10,7 @@
 # Requirements:
 # * bash
 # * bc
+# * egrep
 # * awk
 
 # Usage:
@@ -22,7 +23,7 @@
 # 
 CONFIGFILE='monrestart.conf'
 # If the file contains something 
-if egrep -q -v '^#|^[^ ]*=[^;]*' "$CONFIGFILE"; then
+if egrep -q -v '^#|^[^ ]*=[^;]*|^$' "$CONFIGFILE"; then
   echo "Config file is unclean, you should probably clean it! Running anyway..." >&2
 fi
 echo "Reading config..."
