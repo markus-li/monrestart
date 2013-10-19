@@ -23,8 +23,11 @@
 # 
 CONFIGFILE='monrestart.conf'
 # If the file contains something 
-if egrep -q -v '^#|^[^ ]*=[^;]*|^$' "$CONFIGFILE"; then
-  echo "Config file is unclean, you should probably clean it! Running anyway..." >&2
+if egrep -q -v '^#|^[^ ]*=[^[[:space:]]]?[^;]*|^[[:space:]]*$' "$CONFIGFILE"; then
+  echo "Config file is unclean, you should probably clean it! These lines are unclean:" >&2
+  egrep -n -v '^#|^[^ ]*=[^[[:space:]]]?[^;]*|^[[:space:]]*$' "$CONFIGFILE"
+  echo
+  echo "Running anyway..."
 fi
 echo "Reading config..."
 source "$CONFIGFILE"
